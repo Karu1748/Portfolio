@@ -390,8 +390,13 @@ function renderFlowers(query = "") {
   const lowerQuery = query.toLowerCase();
 
   const filtered = flowers.filter(flower => {
-    return Object.values(flower).some(value =>
-      String(value).toLowerCase().includes(lowerQuery)
+    return (
+      flower.name.toLowerCase().includes(lowerQuery) ||
+      flower.scientific_name.toLowerCase().includes(lowerQuery) ||
+      flower.meaning.toLowerCase().includes(lowerQuery) ||
+      flower.color_variations.toLowerCase().includes(lowerQuery) ||
+      flower.seasonality.toLowerCase().includes(lowerQuery) ||
+      flower.uses.toLowerCase().includes(lowerQuery)
     );
   });
 
@@ -422,6 +427,7 @@ function renderFlowers(query = "") {
     resultsBody.appendChild(row);
   });
 }
+
 
 
       document.getElementById("search-form").addEventListener("submit", e => {
