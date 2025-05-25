@@ -10,16 +10,6 @@
         uses: ""
     },
     {
-        name: "Nasturtium",
-        scientific_name: "Tropaeolum",
-        image: "images/nasturtium.jpg",
-        meaning: "Victory, Patriotism",
-        color_variations: "Red, Yellow, Orange",
-        price_range: "₱₱50 - ₱250",
-        seasonality: "Spring, Summerr",
-        uses: "Ornamental, Culinary (edible flowers)"
-    },
-    {
         name: "Snapdragon",
         scientific_name: "Antirrhinum",
         image: "images/snapdragon.jpg",
