@@ -22,7 +22,7 @@
     {
         name: "Snapdragon",
         scientific_name: "Antirrhinum",
-        image: "images/antirrhinum.jpg",
+        image: "images/snapdragon.jpg",
         meaning: "Strength, Grace",
         color_variations: "Pink, Yellow, Red",
         price_range: "₱100 - ₱400",
