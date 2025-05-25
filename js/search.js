@@ -170,16 +170,6 @@
         uses: "Ornamental"
     },
     {
-        name: "Sunflower",
-        scientific_name: "Helianthus annuus",
-        image: "images/sunflower.jpg",
-        meaning: "Happiness, Loyalty",
-        color_variations: "Yellow, Orange",
-        price_range: "₱50 - ₱200",
-        seasonality: "Summer",
-        uses: "Oil Production, Ornamental"
-    },
-    {
         name: "Hellebore",
         scientific_name: "Helleborus",
         image: "images/hellebore.jpg",
