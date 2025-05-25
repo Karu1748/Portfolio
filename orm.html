@@ -2,11 +2,51 @@
 <html lang="en">
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Flowers Escapade</title>
-    <link rel="stylesheet" href="css/styles_HoA_6.css">
-    <script src="js/script_HoA_6.js" defer></script>
+    <link rel="stylesheet" href="css/styles_HoA_6.css" />
+    <script defer>
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchInput = document.querySelector('.search-input');
+            const table = document.querySelector('table tbody');
+
+            if (!searchInput || !table) return;  
+
+            searchInput.addEventListener('input', function () {
+                const filter = this.value.toLowerCase();
+                const rows = table.querySelectorAll('tr');
+
+                rows.forEach(row => {
+           
+                    const cellsToCheck = [
+                        row.cells[0]?.textContent.toLowerCase() || '',
+                        row.cells[1]?.textContent.toLowerCase() || '',
+                        row.cells[3]?.textContent.toLowerCase() || '',
+                        row.cells[7]?.textContent.toLowerCase() || ''
+                    ];
+
+                 
+                    const match = cellsToCheck.some(text => text.includes(filter));
+                    row.style.display = match ? '' : 'none';
+                });
+            });
+
+            const scrollBtn = document.getElementById('scrollToTopBtn');
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    scrollBtn.style.display = 'block';
+                } else {
+                    scrollBtn.style.display = 'none';
+                }
+            });
+
+            scrollBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script>
 </head>
 <body>
 
@@ -18,13 +58,13 @@
             <button type="button">← Back to Home</button>
         </a>
     </div>
-    
-    
-    <form method="GET" action="orm.html" class="search-form">
-        <input type="text" name="q" value="{{ query|default:'' }}" placeholder="Search for a flower..." class="search-input">
-        <button type="submit" class="search-button">Search</button>
+
+    <form method="GET" action="orm.html" class="search-form" onsubmit="return false;">
+        <input type="text" name="q" placeholder="Search for a flower..." class="search-input" autocomplete="off" />
+        <button type="submit" class="search-button" disabled>Search</button> <!-- disabled because search handled live -->
     </form>
-    
+
+    <!-- Example Django template logic - make sure your backend also supports filtering if you want -->
     {% if flowers %}
         <h2>Results:</h2>
         <table>
@@ -47,7 +87,7 @@
                         <td>{{ flower.scientific_name }}</td>
                         <td>
                             {% if flower.image %}
-                                <img src="{{ flower.image.url }}" alt="{{ flower.scientific_name }}">
+                                <img src="{{ flower.image.url }}" alt="{{ flower.scientific_name }}" />
                             {% else %}
                                 <div class="no-image">No image available</div>
                             {% endif %}
@@ -70,17 +110,16 @@
     <footer>
         <h3>References</h3>
         <div class="references">
-            <div class="references">
-                <div><a href="https://deepgreenpermaculture.com/2024/01/05/the-big-list-of-botanical-plant-names-and-their-meanings-for-gardeners/" target="_blank">Deep Green Permaculture. (2024). <i>The big list of botanical plant names and their meanings</i>.</a></div>
-                <div><a href="https://flowerslib.com/flower-language/" target="_blank">FlowersLib. (n.d.). <i>109 flower meanings</i>.</a></div>
-                <div><a href="https://www.ncertbooks.guru/scientific-name-of-flowers/" target="_blank">NCERT Books. (n.d.). <i>List of scientific flower names with pictures</i>.</a></div>
-                <div><a href="https://florgeous.com/types-of-flowers/" target="_blank">Florgeus. (n.d.). <i>300 types of flowers</i>.</a></div>
-                <div><a href="https://www.w3schools.com/django/django_add_image.php/showdjango.php?filename=demo_static_image" target="_blank">W3Schools.com. (n.d.). <i>Django Adding Image File</i>.</a></div>
-                <div><a href="https://dev.to/vijaysoni007/how-to-show-images-of-the-model-in-django-admin-5hk4" target="_blank">Soni, V. (2022, July 5). <i>How to show images of the model in Django Admin?</i>.</a></div>
-                <div><a href="https://learndjango.com/tutorials/django-search-tutorial?fbclid=IwZXh0bgNhZW0CMTEAAR0L4HyPToK-gWYyd2zGaolcvIw5A1vpdwomI9sb10PibkoRCdukUP_nVFE_aem_TnN9QgRSgshxiMdhCKRM4A" target="_blank">Django, L. (2024, November 18). <i>Django Search Tutorial</i>.</a></div>
-            </div>
-            
+            <div><a href="https://deepgreenpermaculture.com/2024/01/05/the-big-list-of-botanical-plant-names-and-their-meanings-for-gardeners/" target="_blank">Deep Green Permaculture. (2024). <i>The big list of botanical plant names and their meanings</i>.</a></div>
+            <div><a href="https://flowerslib.com/flower-language/" target="_blank">FlowersLib. (n.d.). <i>109 flower meanings</i>.</a></div>
+            <div><a href="https://www.ncertbooks.guru/scientific-name-of-flowers/" target="_blank">NCERT Books. (n.d.). <i>List of scientific flower names with pictures</i>.</a></div>
+            <div><a href="https://florgeous.com/types-of-flowers/" target="_blank">Florgeus. (n.d.). <i>300 types of flowers</i>.</a></div>
+            <div><a href="https://www.w3schools.com/django/django_add_image.php/showdjango.php?filename=demo_static_image" target="_blank">W3Schools.com. (n.d.). <i>Django Adding Image File</i>.</a></div>
+            <div><a href="https://dev.to/vijaysoni007/how-to-show-images-of-the-model-in-django-admin-5hk4" target="_blank">Soni, V. (2022, July 5). <i>How to show images of the model in Django Admin?</i>.</a></div>
+            <div><a href="https://learndjango.com/tutorials/django-search-tutorial?fbclid=IwZXh0bgNhZW0CMTEAAR0L4HyPToK-gWYyd2zGaolcvIw5A1vpdwomI9sb10PibkoRCdukUP_nVFE_aem_TnN9QgRSgshxiMdhCKRM4A" target="_blank">Django, L. (2024, November 18). <i>Django Search Tutorial</i>.</a></div>
+        </div>
         <div class="copyright">All Rights Reserved &copy; 2024</div>
     </footer>
+
 </body>
 </html>
