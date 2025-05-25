@@ -52,7 +52,7 @@
     {
         name: "Bellflower",
         scientific_name: "Campanula",
-        image: "images/campanula.jpg",
+        image: "images/bellflower.jpg",
         meaning: "Gratitude, Humility",
         color_variations: "Blue, Purple, White",
         price_range: "₱100 - ₱350",
