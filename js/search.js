@@ -395,40 +395,44 @@
       const noResults = document.getElementById("no-results");
       const searchInput = document.getElementById("search-input");
 
-      function renderFlowers(query = "") {
-        resultsBody.innerHTML = "";
-        const filtered = flowers.filter(f =>
-          f.name.toLowerCase().includes(query.toLowerCase()) ||
-          f.scientific_name.toLowerCase().includes(query.toLowerCase())
-        );
+function renderFlowers(query = "") {
+  resultsBody.innerHTML = "";
+  const lowerQuery = query.toLowerCase();
 
-        if (filtered.length === 0) {
-          noResults.style.display = "block";
-          return;
+  const filtered = flowers.filter(flower => {
+    return Object.values(flower).some(value =>
+      String(value).toLowerCase().includes(lowerQuery)
+    );
+  });
+
+  if (filtered.length === 0) {
+    noResults.style.display = "block";
+    return;
+  }
+
+  noResults.style.display = "none";
+  filtered.forEach(flower => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td><strong>${flower.name}</strong></td>
+      <td>${flower.scientific_name}</td>
+      <td>
+        ${
+          flower.image
+            ? `<img src="${flower.image}" alt="${flower.scientific_name}">`
+            : `<div class="no-image">No image available</div>`
         }
+      </td>
+      <td>${flower.meaning}</td>
+      <td>${flower.color_variations}</td>
+      <td>${flower.price_range}</td>
+      <td>${flower.seasonality}</td>
+      <td>${flower.uses}</td>
+    `;
+    resultsBody.appendChild(row);
+  });
+}
 
-        noResults.style.display = "none";
-        filtered.forEach(flower => {
-          const row = document.createElement("tr");
-          row.innerHTML = `
-            <td><strong>${flower.name}</strong></td>
-            <td>${flower.scientific_name}</td>
-            <td>
-              ${
-                flower.image
-                  ? `<img src="${flower.image}" alt="${flower.scientific_name}">`
-                  : `<div class="no-image">No image available</div>`
-              }
-            </td>
-            <td>${flower.meaning}</td>
-            <td>${flower.color_variations}</td>
-            <td>${flower.price_range}</td>
-            <td>${flower.seasonality}</td>
-            <td>${flower.uses}</td>
-          `;
-          resultsBody.appendChild(row);
-        });
-      }
 
       document.getElementById("search-form").addEventListener("submit", e => {
         e.preventDefault();
